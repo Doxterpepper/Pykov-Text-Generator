@@ -1,4 +1,5 @@
 /* http://paletton.com/#uid=33r0l0kgDoo6VCzbDtrlbk7qleR */
+
 body {
   background-color: #3E687A;
 }
@@ -8,4 +9,20 @@ body {
   color: #10394B;
   text-align: center;
   padding: 5px;
+}
+
+#functions {
+  text-align: center;
+  margin-top:100px;
+}
+
+textarea {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  resize: none;
+  width: 80%;
+  height: 500;
+  background-color: #91ACB7;
+  border-color: #91ACB7;
 }
