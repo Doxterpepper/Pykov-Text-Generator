@@ -1,0 +1,28 @@
+/* http://paletton.com/#uid=33r0l0kgDoo6VCzbDtrlbk7qleR */
+
+body {
+  background-color: #333333;
+}
+
+.title {
+  background-color: #999999;
+  /*color: #10394B;*/
+  text-align: center;
+  padding: 5px;
+}
+
+#functions {
+  text-align: center;
+  margin-top:100px;
+}
+
+textarea {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  resize: none;
+  width: 80%;
+  height: 500;
+  background-color: #e6e6e6;
+  border-color: #e6e6e6;
+}
