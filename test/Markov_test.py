@@ -11,6 +11,13 @@ class Markov_Test(unittest.TestCase):
 		}
 		gen, words = Markov.gen_relation(sentence)
 		self.assertEqual(example, gen)
+
+	def test_relation_file(self):
+		f = open('test.txt', 'r')
+		text = f.read()
+		f.close()
+		print(Markov.gen_relation(text))
+		print()
 	
 	def test_gen_words(self):
 		corp = "This is quite a sentence and such"
