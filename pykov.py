@@ -13,11 +13,5 @@ def userless_gen():
 	data = request.get_json()
 	return Markov.gen(data['text'], data['n'])
 
-@app.route('/test')
-def test():
-	print(request.args.get('this'))
-	return 'test'
-	
-
 if __name__ == '__main__':
 	app.run('', 4999)
