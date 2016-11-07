@@ -1,4 +1,5 @@
 import sqlite3
+import hashlib
 conn = sqlite3.connect('pykov.db')
 
 c = conn.cursor()
@@ -10,10 +11,12 @@ CREATE TABLE Users(
 username TEXT NOT NULL UNIQUE, 
 password TEXT NOT NULL,
 id INTEGER PRIMARY KEY)''')
+user_pass = 'admin'
+hashed_pass = hashlib.md5(user_pass.encode()).hexdigest()
 c.execute('''
 INSERT INTO Users
 (username, password)
-VALUES ('admin','admin');''')
+VALUES ('admin',?);''',(hashed_pass,))
 c.execute('''
 CREATE TABLE Text(
 content TEXT NOT NULL,
