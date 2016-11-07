@@ -6,16 +6,22 @@
 		<div class=title>
 			<h1>Pykov Text Generator</h1>
 		</div>
+
 		<div id=functions>
-		<h4>User Name:</h4><input type="text" id="userName" class="form-control input-sm chat-input"/>
+		{% if error %}
+		<p class="error"><strong>Error:</strong> {{ error }}
+		{% endif %}		
+		<form method="POST" action="/signup.html">
+		<h4>User Name:</h4><input type="text" name="userName" class="form-control input-sm chat-input"/>
 		</br>
-		<h4>Password:</h4><input type="password" size="40" maxlength="50" id="userPassword" class="form-control input-sm chat-input"/>
-		<h4>Re-type Password:</h4><input type="password" id="userPassword" class="form-control input-sm chat-input"/>
+		<h4>Password:</h4><input type="password" name="userPassword" class="form-control input-sm chat-input"/>
+		<h4>Re-type Password:</h4><input type="password" name="userPasswordVerification" class="form-control input-sm chat-input"/>
 		</div>
 		<div>
 		</br>
 		<a href="login.html"><button id="button" class="btn btn-primary btn-block">Login </button></a>
-		<button id="button" class="btn btn-primary btn-block">Sign Up</button>
+		<input type="submit" value="Sign Up" class="btn btn-primary btn-block"/>
+		</form>
 		</div>
 	<body>
 </hmtl>
