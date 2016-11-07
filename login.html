@@ -1,0 +1,23 @@
+<html> 
+	<head>
+    <link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
+	</head>
+	<body>
+		<div class=title>
+			<h1>Pykov Text Generator</h1>
+		</div>
+		<div id=functions>
+		{% if error %}
+		<p class="error"><strong>Error:</strong> {{ error }}
+		{% endif %}
+		<form method="POST" action="/login.html">
+		<h4>User Name:</h4><input type="username" name="userName" class="form-control input-sm chat-input"/>
+		<h4>Password:</h4><input type="password" name="userPassword" class="form-control input-sm chat-input"/>
+		</div>
+		<div>
+		<input type="submit" value="Login" class="btn btn-primary btn-block"/>
+		</form>
+		<a href="signup.html"><button id="button" class="btn btn-primary btn-block">Sign Up</button></a>
+		</div>
+	</body>
+</hmtl>
