@@ -1,2 +1,3 @@
 *.swp
 pykov.db
+__pycache__
