@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, url_for, request, Response, redirect, session, escape
 from flask_wtf import Form
 from flask_login import login_required
@@ -116,6 +117,18 @@ def logout():
     return redirect("index.html")
 	
 app.secret_key = "b'\x07\x8c7>s\xe6\x88\xa2\xdf?[\xedy\xdf\xf0sL\xa4\xe63!-E7"
+
+
+# Use the makrov algorithm to generate text
+# based on the json data sent in a get or post.
+# curl -XGET\
+#      -H "Content-Type: application/json"\
+#      -d '{"text": 'This is some corpus", "n": 10}'\
+#      'some.url/api/gen'
+@app.route('/api/gen')
+def userless_gen():
+	data = request.get_json()
+	return Markov.gen(data['text'], data['n'])
 
 	
 if __name__ == '__main__':
