@@ -1,16 +1,32 @@
 <html>
   <head>
-    <link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
+    <link rel='stylesheet' href="{{ url_for('static', filename='index.css') }}">
+	<link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
+
   </head>
   <body>
     <div class=title>
       <h1>Pykov Text Generator</h1>
     </div>
-    <div id=functions>
+    <div id=functions1>
+	{% if username %}
+		<p class="username"><strong>Welcome, {{username}}.</strong> 
+	{% endif %}
 	<a href="login.html"><button id="button" class="btn btn-primary btn-block">Login</button></a>
 	<a href="signup.html"><button id="button" class="btn-primary btn-block">Sign Up</button></a>
+	</div>
 	</br>
+	<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div>
+	<div id=functions>
       <textarea></textarea>
     </div>
-  <body>
-</html>
+  </body>
+  
+  

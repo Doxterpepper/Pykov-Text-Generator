@@ -1,23 +1,76 @@
-<html> 
-	<head>
+<!DOCTYPE html>
+<html>
+<style>
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.container {
+    padding: 16px;
+	margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 300px;
+    margin-left: 300px;
+	color: #999999;
+}
+
+span.psw {
+	width: auto;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+}
+</style>
+
+<head>
+
     <link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
-	</head>
-	<body>
+
+</head>
+<body>
+
 		<div class=title>
 			<h1>Pykov Text Generator</h1>
 		</div>
-		<div id=functions>
-		{% if error %}
+
+  <div class="container">
+  {% if error %}
 		<p class="error"><strong>Error:</strong> {{ error }}
 		{% endif %}
 		<form method="POST" action="/login.html">
-		<h4>User Name:</h4><input type="username" name="userName" class="form-control input-sm chat-input"/>
-		<h4>Password:</h4><input type="password" name="userPassword" class="form-control input-sm chat-input"/>
-		</div>
-		<div>
-		<input type="submit" value="Login" class="btn btn-primary btn-block"/>
-		</form>
-		<a href="signup.html"><button id="button" class="btn btn-primary btn-block">Sign Up</button></a>
-		</div>
-	</body>
-</hmtl>
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="userName" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="userPassword" required>
+        
+    <button type="submit">Login</button>
+	</form>
+	<a href="signup.html"><button type="submit">Sign Up</button></a>
+
+</body>
+</html>
+
+

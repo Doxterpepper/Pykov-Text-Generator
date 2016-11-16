@@ -1,4 +1,4 @@
-<html> 
+<!--<html> 
 	<head>
     <link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
 	</head>
@@ -24,4 +24,86 @@
 		</form>
 		</div>
 	<body>
-</hmtl>
+</hmtl>-->
+
+<!DOCTYPE html>
+<html>
+<style>
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.container {
+    padding: 16px;
+	margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 300px;
+    margin-left: 300px;
+	color: #999999;
+}
+
+span.psw {
+	width: auto;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+}
+</style>
+
+<head>
+
+    <link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
+
+</head>
+<body>
+
+		<div class=title>
+			<h1>Pykov Text Generator</h1>
+		</div>
+
+  <div class="container">
+  {% if error %}
+		<p class="error"><strong>Error:</strong> {{ error }}
+		{% endif %}
+	{% if username %}
+		<p class="username"><strong>Welcome, {{username}}.</strong> 
+	{% endif %}	
+		<form method="POST" action="/signup.html">
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="userName" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="userPassword" required>
+	
+	<label><b>Re-type Password</b></label>
+	<input type="password" placeholder="Re-type Password" name="userPasswordVerification" required>    
+    <a href="login.html"><button id="button">Login</button></a>
+	<button type="submit">Sign Up</button>
+	</form>
+
+</body>
+</html>
+
+
