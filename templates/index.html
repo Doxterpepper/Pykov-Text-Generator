@@ -1,4 +1,18 @@
 <html>
+
+<style>
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+}
+</style>
+
   <head>
     <link rel='stylesheet' href="{{ url_for('static', filename='index.css') }}">
 	<link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
@@ -16,14 +30,7 @@
 	<a href="signup.html"><button id="button" class="btn-primary btn-block">Sign Up</button></a>
 	</div>
 	</br>
-	<div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div>
+	
 	<div id=functions>
       <textarea></textarea>
     </div>
