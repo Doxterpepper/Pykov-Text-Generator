@@ -11,3 +11,10 @@ textarea {
   background-color: #e6e6e6;
   border-color: #e6e6e6;
 }
+
+input[type='text'] {
+  width: 80%;
+  margin-bottom: 10px;
+  background-color: #e6e6e6;
+  border-color: #e6e6e6;
+}
