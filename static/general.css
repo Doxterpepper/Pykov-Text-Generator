@@ -15,14 +15,10 @@ body {
   text-align: center;
   margin-top:100px;
 }
+#functions1 {
+	margin-left: 100px;
+	margin-top: 50px;
+	margin-right: 200px;
 
-textarea {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  resize: none;
-  width: 80%;
-  height: 500;
-  background-color: #e6e6e6;
-  border-color: #e6e6e6;
 }
+
