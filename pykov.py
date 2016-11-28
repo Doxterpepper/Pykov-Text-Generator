@@ -146,7 +146,7 @@ def validateName(username):
 					if dbName == username:
 						valid = False
 	return valid		
-
+	
 def createUser(username, password):
 	hashed_pass = hashlib.md5(password.encode()).hexdigest()
 	token = hashlib.md5(username.encode()).hexdigest()
