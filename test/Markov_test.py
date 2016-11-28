@@ -1,5 +1,6 @@
 import Markov
 import unittest
+import re
 
 class Markov_Test(unittest.TestCase):
 	def test_gen_relation(self):
@@ -9,7 +10,8 @@ class Markov_Test(unittest.TestCase):
 		  'is': ['a'],
 		  'a': ['dog']
 		}
-		gen, words = Markov.gen_relation(sentence)
+		gen = Markov.gen_relation(sentence)
+		print("Sentence: " + Markov.gen_with_relations(gen, 10))
 		self.assertEqual(example, gen)
 
 	def test_relation_file(self):
@@ -17,12 +19,11 @@ class Markov_Test(unittest.TestCase):
 		text = f.read()
 		f.close()
 		print(Markov.gen_relation(text))
-		print()
 	
 	def test_gen_words(self):
 		corp = "This is quite a sentence and such"
-		text = Markov.gen(corp, 10)
-		print(text)
+		text = Markov.gen_with_text(corp, 10)
+		print("test_gen_words: " + str(text))
 
 if __name__ == '__main__':
 	unittest.main()
