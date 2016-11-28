@@ -61,6 +61,9 @@ def login():
 	else:
 		return render_template("login.html")
 		
+# { 'title': 'some title',
+#   'corpus': 'some corpus',
+#   'token': 'user token' }
 @app.route('/api/upload', methods=['POST'])
 def upload():
 	data = request.get_json()
@@ -159,26 +162,37 @@ def createUser(username, password):
 	conn.close()
 	return True
 
-def gen_id(data):
+def genSaved(data):
 	if not 'token' in data:
 		return '401 Unauthorized'
+	if not 'n' in data:
+		n = 10
+	else:
+		n = data['n']
 
 	user_id = validate_token(data['token'])
 	if user_id < 0:
 		return '401 Unauthorized'
-
+	print(user_id)
 	conn = sqlite3.connect('pykov.db')
 	cur = conn.cursor()
 	cur.execute('''
 		SELECT relations
 		FROM Text
 		WHERE uid=?
-	''', user_id)
-	rel = cur.fetchall()
-	rel = rel[0]
+		AND id=?
+	''', (user_id, data['text-id']))
+	ret = cur.fetchall()
+	rel = ret[0]
+	rel = pickle.loads(rel[0])
+	return Markov.gen_with_relations(rel[0], n)
 
-def gen_text(data):
-	pass
+def genNewText(data):
+	if 'n' in data:
+		n = data['n']
+	else:
+		n = 10
+	return Markov.gen_with_text(data['corpus'], n)
 	
 @app.route("/logout")
 @login_required
@@ -198,11 +212,14 @@ app.secret_key = "b'\x07\x8c7>s\xe6\x88\xa2\xdf?[\xedy\xdf\xf0sL\xa4\xe63!-E7"
 @app.route('/api/gen')
 def userless_gen():
 	data = request.get_json()
-	if 'id' in data:
-		return gen_id(data)
-	elif 'corpus' in data and 'n' in data:
-		return gen_text(data)
+	if data == None:
+		return "401 unauthorized"
+	if 'text-id' in data:
+		print('here')
+		return genSaved(data)
+	elif 'corpus' in data:
+		return genNewText(data)
 	return ""
 	
 if __name__ == '__main__':
-	app.run('', 4999, debug=True)
+	app.run(port=4999)
