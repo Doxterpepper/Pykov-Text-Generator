@@ -222,4 +222,4 @@ def userless_gen():
 	return ""
 	
 if __name__ == '__main__':
-	app.run(port=4999)
+	app.run(port=4999, debug=True)
