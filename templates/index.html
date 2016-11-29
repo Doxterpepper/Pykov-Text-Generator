@@ -3,76 +3,72 @@
 <style>
 
 button.absolute {
-    position: absolute;
+	position: absolute;
 	left: 140px;
 	background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 20%;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 20%;
 }
 button.absolute2 {
 	position: absolute;
 	left: 500px;
 	background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 20%;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 20%;
 }
 div.absolute {
 	position: absolute;
-    right: 140px;
+	right: 140px;
 	background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 20%;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 20%;
 }
 </style>
 
-  <head>
-    <link rel='stylesheet' href="{{ url_for('static', filename='index.css') }}">
-	<link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
+	<head>
+		<link rel='stylesheet' href="{{ url_for('static', filename='index.css') }}">
+		<link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
+	</head>
 
-  </head>
-  <body>
-    <div class=title>
-      <h1>Pykov Text Generator</h1>
-    </div>
-    <div id=functions1>
-	{% if session['username'] %}
-		<p class="username"><strong>Welcome, {{session['username']}}.</strong> 
-	{% endif %}
-	<select>
-		{% for item in texts %}
-			<option value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
-		{% endfor %}
-	</select>
-	<a href="login.html"><button id="button" class="absolute">Login</button></a>
-	<a href="signup.html"><button id="button" class="absolute2">Sign Up</button></a>
-	</div>
-	</br>
+	<body>
+		<div class=title>
+			<h1>Pykov Text Generator</h1>
+		</div>
+		<div id=functions1>
+			<select>
+				{% for item in texts %}
+					<option value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+				{% endfor %}
+			</select>
+			{% if session['username'] %}
+				<p class="username"><strong>Welcome, {{session['username']}}.</strong> 
+			{% endif %}
+			<a href="login.html"><button id="button" class="absolute">Login</button></a>
+			<a href="signup.html"><button id="button" class="absolute2">Sign Up</button></a>
+		</div>
+		<br>
+		
+		<div id=functions>
+			<input id=titile type='text' placeholder='Title'>
+			<textarea id=corpus placeholder='Corpus'></textarea>
+		</div>
 	
-	<div id=functions>
-		<input id=titile type='text' placeholder='Title'>
-		<textarea id=corpus placeholder='Corpus'></textarea>
-	</div>
-</body>
-  
-      <textarea></textarea>
-    </div>
-	<div class=absolute>
-	<!--<form action="pykov.py">-->
-Enter Word Count: <input type="text">
-<input type="submit" value="Generate">
-<!--</form>
-	<button class="absolute">Generate</button></a>-->
-	</div>
-  </body>
+		</div>
+		<div class=absolute>
+			Enter Word Count: <input type="text">
+			<input type="submit" value="Generate">
+		</div>
+	</body>
+</html>
