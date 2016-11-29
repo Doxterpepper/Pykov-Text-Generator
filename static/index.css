@@ -18,3 +18,34 @@ input[type='text'] {
   background-color: #e6e6e6;
   border-color: #e6e6e6;
 }
+
+#text-inputs {
+  text-align: center;
+}
+
+#functions1 {
+	margin: 50px auto 10px auto; /* top right bottom left */
+	width: 80%;
+	display: block;
+}
+
+#functions2 {
+	width: 80%;
+	display: block;
+	margin: 10px auto 10px auto;
+	/*background-color: #4CAF50;*/
+	/*color: white;*/
+	/*padding: 14px 20px;*/
+	border: none;
+}
+
+#controls {
+	background-color: #4CAF50;
+	color: white;
+	width: 20%;
+	padding: 10px;
+}
+
+#functions2 input[type='text'] {
+	width: 100px;
+}

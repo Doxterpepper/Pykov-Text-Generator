@@ -1,42 +1,4 @@
 <html>
-
-<style>
-
-button.absolute {
-	position: absolute;
-	left: 140px;
-	background-color: #4CAF50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 20%;
-}
-button.absolute2 {
-	position: absolute;
-	left: 500px;
-	background-color: #4CAF50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 20%;
-}
-div.absolute {
-	position: absolute;
-	right: 140px;
-	background-color: #4CAF50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 20%;
-}
-</style>
-
 	<head>
 		<link rel='stylesheet' href="{{ url_for('static', filename='index.css') }}">
 		<link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
@@ -55,20 +17,21 @@ div.absolute {
 			{% if session['username'] %}
 				<p class="username"><strong>Welcome, {{session['username']}}.</strong> 
 			{% endif %}
-			<a href="login.html"><button id="button" class="absolute">Login</button></a>
-			<a href="signup.html"><button id="button" class="absolute2">Sign Up</button></a>
+			<a class='alignright button' href="login.html">Login</a>
+			<a class='alignright button' href="signup.html">Sign Up</a>
 		</div>
-		<br>
 		
-		<div id=functions>
+		<div id=text-inputs>
 			<input id=titile type='text' placeholder='Title'>
 			<textarea id=corpus placeholder='Corpus'></textarea>
 		</div>
 	
 		</div>
-		<div class=absolute>
-			Enter Word Count: <input type="text">
-			<input type="submit" value="Generate">
+		<div  id=functions2>
+			<div class=alignright id=controls>
+				Enter Word Count: <input type="text">
+				<input type="submit" value="Generate">
+			</div>
 		</div>
 	</body>
 </html>
