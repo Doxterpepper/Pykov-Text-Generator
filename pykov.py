@@ -26,6 +26,22 @@ def index():
 	""")
 	for item in texts:
 		t.append(item)
+	if 'username' in session and session['username'] != None:
+		user_id = c.execute("""
+			SELECT id
+			FROM Users
+			WHERE username=?
+		""", (session['username'],))
+		user_id = user_id.fetchall()[0][0]
+		print(user_id)
+		texts = c.execute("""
+			SELECT id, title
+			FROM Text
+			WHERE uid=?;
+		""", (user_id,))
+		for item in texts:
+			t.append(item)
+		
 	conn.close()
 	return render_template("index.html", texts=t)
 
