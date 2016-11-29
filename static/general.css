@@ -14,7 +14,6 @@ a.button {
 	text-decoration: none;
 	background-color: #4CAF50;
 	color: white;
-	/* default padding */
 	padding: 3px 10px 3px 10px; /* top right bottom left */
 	border: none;
 	margin-left: 10px
