@@ -16,7 +16,18 @@ conn = sqlite3.connect(DATABASE)
 
 @app.route('/')
 def index():
-	return render_template("index.html")
+	t = []
+	conn = sqlite3.connect("pykov.db")
+	c = conn.cursor()
+	texts = c.execute("""
+		SELECT id, title
+		FROM Text
+		WHERE uid=1;
+	""")
+	for item in texts:
+		t.append(item)
+	conn.close()
+	return render_template("index.html", texts=t)
 
 @app.route('/signup.html', methods=['POST', 'GET'])	
 def signup():
