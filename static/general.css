@@ -22,3 +22,7 @@ a.button {
 .alignright {
 	float: right;
 }
+
+strong {
+	color: #FFFFFF;
+}

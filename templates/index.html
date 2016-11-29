@@ -15,10 +15,11 @@
 				{% endfor %}
 			</select>
 			{% if session['username'] %}
-				<p class="username"><strong>Welcome, {{session['username']}}.</strong> 
+				<p class="username alignright"><strong>Welcome, {{session['username']}}.</strong> 
+			{% else %}
+				<a class='alignright button' href="login.html">Login</a>
+				<a class='alignright button' href="signup.html">Sign Up</a>
 			{% endif %}
-			<a class='alignright button' href="login.html">Login</a>
-			<a class='alignright button' href="signup.html">Sign Up</a>
 		</div>
 		
 		<div id=text-inputs>
