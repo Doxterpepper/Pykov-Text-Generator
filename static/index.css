@@ -14,6 +14,7 @@ textarea {
 
 form {
 	display: inline;
+	margin-left: 30px;
 }
 
 input[type=submit] {
@@ -35,6 +36,7 @@ input[type='text'] {
 	margin: 50px auto 10px auto; /* top right bottom left */
 	width: 80%;
 	display: block;
+	color: #FFFFFF;
 }
 
 #functions2 {

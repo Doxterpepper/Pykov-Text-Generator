@@ -17,11 +17,12 @@
 				{% endfor %}
 			</select>
 			{% if session['username'] %}
-				<p class="username alignright"><strong>Welcome, {{session['username']}}.</strong></p>
-				<form method='POST' action='/logout'>
-					<input class='button alignright' type='submit' value='Logout'>
-					
-				</form>
+				<div class=alignright>
+					Welcome, {{session['username']}}.
+					<form method='POST' action='/logout'>
+						<input class='button alignright' type='submit' value='Logout'>
+					</form>
+				</div>
 			{% else %}
 				<a class='alignright button' href="login.html">Login</a>
 				<a class='alignright button' href="signup.html">Sign Up</a>
