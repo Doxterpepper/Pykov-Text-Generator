@@ -2,6 +2,7 @@
 	<head>
 		<link rel='stylesheet' href="{{ url_for('static', filename='index.css') }}">
 		<link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
+		<script rel='text/javascript' src="{{url_for('static', filename='rest_client.js')}}"></script>
 	</head>
 
 	<body>
@@ -11,11 +12,15 @@
 		<div id=functions1>
 			<select>
 				{% for item in texts %}
-					<option value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+					<option onClick="get_corpus({{item[0]}})" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
 			</select>
 			{% if session['username'] %}
-				<p class="username alignright"><strong>Welcome, {{session['username']}}.</strong> 
+				<p class="username alignright"><strong>Welcome, {{session['username']}}.</strong></p>
+				<form method='POST' action='/logout'>
+					<input class='button alignright' type='submit' value='Logout'>
+					
+				</form>
 			{% else %}
 				<a class='alignright button' href="login.html">Login</a>
 				<a class='alignright button' href="signup.html">Sign Up</a>

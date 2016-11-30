@@ -12,6 +12,14 @@ textarea {
   border-color: #e6e6e6;
 }
 
+form {
+	display: inline;
+}
+
+input[type=submit] {
+  margin: 0px;
+}
+
 input[type='text'] {
   width: 80%;
   margin-bottom: 10px;
