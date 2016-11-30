@@ -11,8 +11,8 @@ function get_corpus(id, token) {
 	var data = JSON.stringify({"id": id, 'token': token});
 	ret = requests.send(data);
 	var response = JSON.parse(requests.response);
-	document.getElementById('corpus').value = text['text'];
-	document.getElementById('title').value = text['title'];
+	document.getElementById('corpus').value = response['text'];
+	document.getElementById('title').value = response['title'];
 }
 
 function generate() {
