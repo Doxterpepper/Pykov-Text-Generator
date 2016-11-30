@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<link rel='stylesheet' href="{{ url_for('static', filename='index.css') }}">
+		<link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
+		<script rel='text/javascript' src="{{url_for('static', filename='rest_client.js')}}"></script>
+	</head>
+
+	<body>
+		<div class=title>
+			<h1>Pykov Text Generator</h1>
+		</div>
+		<div id=functions1>
+			<select>
+				<option onClick="clear_corpus()" selected></option>
+				<!-- Add default texts -->
+				{% for item in texts[0] %}
+					<option onClick="get_corpus({{item[0]}})" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+				{% endfor %}
+				{% for item in texts[1] %}
+					<option onClick="get_corpus({{item[0]}}, {{session['token']}})" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+				{% endfor %}
+			</select>
+			{% if session['username'] %}
+				<div class=alignright>
+					Welcome, {{session['username']}}.
+					<form method='POST' action='/logout'>
+						<input class='button alignright' type='submit' value='Logout'>
+					</form>
+				</div>
+			{% else %}
+				<a class='alignright button' href="login.html">Login</a>
+				<a class='alignright button' href="signup.html">Sign Up</a>
+			{% endif %}
+		</div>
+		
+		<div id=text-inputs>
+			<input id=title type='text' placeholder='Title'>
+			<textarea id=corpus placeholder='Welcome to the Pykov Text Generator. To use, either select a default file from the dropdown above, or log in and submit your own texts to generate from. After selecting your desired text, input an integer number under generate and behold the results!'></textarea>
+		</div>
+
+		<div  id=functions2>
+			<div class=alignright id=controls>
+				Enter Word Count: <input type="text">
+				<input type="submit" value="Generate">
+			</div>
+			<div class=alignleft id=controls>
+				<input onClick=save_corpus("{{session['token']}}") type="submit" value="Submit">
+			</div>
+		</div>
+	</body>
+</html>
