@@ -56,3 +56,9 @@ input[type='text'] {
 #functions2 input[type='text'] {
 	width: 100px;
 }
+
+#generated {
+	width: 80%;
+	display: block;
+	margin: 10px auto 10px auto;
+}
