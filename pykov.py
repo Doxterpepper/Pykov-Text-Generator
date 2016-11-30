@@ -12,8 +12,8 @@ import db_init
 app = Flask(__name__)
 name = ''
 pwd = ''
-DATABASE = 'pykov.sqlite'
-conn = sqlite3.connect(DATABASE)
+#DATABASE = 'pykov.sqlite'
+#conn = sqlite3.connect(DATABASE)
 
 @app.route('/')
 def index():
