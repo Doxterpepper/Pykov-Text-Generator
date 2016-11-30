@@ -5,6 +5,7 @@ import sqlite3
 import hashlib
 import Markov
 import pickle
+import json
 
 import db_init
 
@@ -115,12 +116,13 @@ def get_corpus():
 	conn = sqlite3.connect("pykov.db")
 	c = conn.cursor()
 	text = c.execute("""
-		SELECT Content
+		SELECT Title, Content
 		FROM Text
 		WHERE id=?
 		AND uid=?
 	""", (data['id'], user_id))
-	return json.dumps({text.fetchall()[0][0]})
+	ret = text.fetchall()
+	return json.dumps({"title": ret[0][0], "text": ret[0][1]})
 	
 
 @app.route('/api/list', methods=['GET'])

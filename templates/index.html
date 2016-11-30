@@ -11,6 +11,7 @@
 		</div>
 		<div id=functions1>
 			<select>
+				<option onClick="clear_corpus()" selected></option>
 				{% for item in texts %}
 					<option onClick="get_corpus({{item[0]}})" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
@@ -28,7 +29,7 @@
 		</div>
 		
 		<div id=text-inputs>
-			<input id=titile type='text' placeholder='Title'>
+			<input id=title type='text' placeholder='Title'>
 			<textarea id=corpus placeholder='Corpus'></textarea>
 		</div>
 	
