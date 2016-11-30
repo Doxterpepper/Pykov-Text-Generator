@@ -40,9 +40,14 @@ password = "Th3yllN3v3rGu3ss"
 
 c = conn.cursor()
 
+
+
 def init_corpus():
-	for f in os.listdir("static/texts"):
-		text_file = open('static/texts/' + f, 'r')
+	path = os.path.join("static", "texts")
+	#Eric, change this so it's specific to your directory. Be sure that you are going all the way down to \static\texts\\
+	path = r"C:\Users\Jordan\Documents\GitHub\Pykov-Text-Generator-master\static\texts\\"
+	for f in os.listdir(r"C:\Users\Jordan\Documents\GitHub\Pykov-Text-Generator-master\static\texts\\"):
+		text_file = open(path + f, 'r')
 		text = text_file.read()
 		default_texts.append((re.split("\.", f)[0], text, pickle.dumps(Markov.gen_relation(text)), 1))
 	for text in default_texts:
@@ -61,6 +66,12 @@ def create_user():
 		VALUES (?, ?, ?)
 	""", (admin, hp, token))
 
+	
+c.execute('''
+		DROP TABLE Users;
+''')
+c.execute('''DROP TABLE Text;''')
+	
 try:
 	# Create Users table
 	c.execute('''
