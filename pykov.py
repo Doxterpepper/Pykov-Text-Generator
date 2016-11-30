@@ -20,7 +20,7 @@ def index():
 		user_text = get_user_text()
 	return render_template("index.html", texts=(t, user_text))
 
-@app.route('/signup.html', methods=['POST', 'GET'])	
+@app.route('/signup.html', methods=['POST', 'GET'])
 def signup():
 	error = None
 	if request.method == 'POST':
