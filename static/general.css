@@ -6,23 +6,23 @@ body {
 
 .title {
   background-color: #999999;
-  /*color: #10394B;*/
   text-align: center;
   padding: 5px;
 }
 
-#functions {
-  text-align: center;
-  margin-top:100px;
+a.button {
+	text-decoration: none;
+	background-color: #4CAF50;
+	color: white;
+	padding: 3px 10px 3px 10px; /* top right bottom left */
+	border: none;
+	margin-left: 10px
 }
 
-#functions1 {
-	margin-left: 100px;
-	margin-top: 50px;
-	margin-right: 200px;
+.alignright {
+	float: right;
 }
-#functions2 {
-	margin-left: 1000px;
-	margin-top: 50px;
-	margin-right: 2000px;
+
+strong {
+	color: #FFFFFF;
 }

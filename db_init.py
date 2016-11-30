@@ -27,38 +27,65 @@ but the following tables will exist.
 
 import sqlite3
 import hashlib
+import os
+import hashlib
+import re
+import Markov
+import pickle
 conn = sqlite3.connect('pykov.db')
+
+default_texts = []
+admin = 'MrPykov'
+password = "Th3yllN3v3rGu3ss"
 
 c = conn.cursor()
 
-#c.execute('''DROP TABLE IF EXISTS Users''')
-#c.execute('''DROP TABLE IF EXISTS Text''')
+def init_corpus():
+	for f in os.listdir("static/texts"):
+		text_file = open('static/texts/' + f, 'r')
+		text = text_file.read()
+		default_texts.append((re.split("\.", f)[0], text, pickle.dumps(Markov.gen_relation(text)), 1))
+	for text in default_texts:
+		c.execute('''
+			INSERT INTO Text
+			(title, content, relations, uid)
+			VALUES (?, ?, ?, ?)
+		''', text)
+
+def create_user():
+	hp = hashlib.md5(password.encode()).hexdigest()
+	token = hashlib.md5(admin.encode()).hexdigest()
+	c.execute("""
+		INSERT INTO Users
+		(username, password, token)
+		VALUES (?, ?, ?)
+	""", (admin, hp, token))
+
 try:
+	# Create Users table
 	c.execute('''
-	CREATE TABLE Users(
-	username TEXT NOT NULL UNIQUE, 
-	password TEXT NOT NULL,
-	token TEXT NOT NULL,
-	id INTEGER PRIMARY KEY)''')
+		CREATE TABLE Users(
+		username TEXT NOT NULL UNIQUE, 
+		password TEXT NOT NULL,
+		token TEXT NOT NULL,
+		id INTEGER PRIMARY KEY)
+	''')
 
-	"""
-	user_pass = 'admin'
-	hashed_pass = hashlib.md5(user_pass.encode()).hexdigest()
-	c.execute('''
-	INSERT INTO Users
-	(username, password)
-	VALUES ('admin',?);''',(hashed_pass,))
-	"""
-	c.execute('''
 
-	CREATE TABLE Text(
-	content TEXT NOT NULL,
-	relations BLOB,
-	uid INTEGER,
-	title TEXT NOT NULL,
-	id INTEGER PRIMARY KEY NOT NULL,
-	FOREIGN KEY(uid) REFERENCES Users(id)
-	);''')
+	# Create Text table
+	c.execute('''
+		CREATE TABLE Text(
+		content TEXT NOT NULL,
+		relations BLOB,
+		uid INTEGER,
+		title TEXT NOT NULL,
+		id INTEGER PRIMARY KEY NOT NULL,
+		FOREIGN KEY(uid) REFERENCES Users(id));
+	''')
+
+	create_user()
+	init_corpus()
+
 except sqlite3.OperationalError:
 	print("warining table already created")
 
