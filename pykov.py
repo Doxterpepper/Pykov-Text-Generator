@@ -1,6 +1,5 @@
 from flask import Flask, render_template, url_for, request, Response, redirect, session, escape
 from flask_wtf import Form
-#from flask_login import login_required
 import sqlite3
 import hashlib
 import Markov
@@ -12,8 +11,6 @@ import db_init
 app = Flask(__name__)
 name = ''
 pwd = ''
-#DATABASE = 'pykov.sqlite'
-#conn = sqlite3.connect(DATABASE)
 
 @app.route('/')
 def index():
@@ -103,7 +100,6 @@ def upload():
 @app.route('/api/corpus', methods=['GET', 'POST'])
 def get_corpus():
 	print(request.is_json)
-	#print(request.data.decode())
 	data = request.get_json(force=True)
 	if data == None:
 		return "401"
