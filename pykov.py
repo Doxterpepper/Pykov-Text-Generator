@@ -17,8 +17,11 @@ pwd = ''
 
 @app.route('/')
 def index():
-	t = get_text()	
-	return render_template("index.html", texts=t)
+	t = get_default_text()	
+	user_text = []
+	if 'username' in session and session['username'] != None:
+		user_text = get_user_text()
+	return render_template("index.html", texts=(t, user_text))
 
 @app.route('/signup.html', methods=['POST', 'GET'])	
 def signup():
@@ -160,7 +163,7 @@ def validate(username, password):
 						valid=md5hash(dbPass,password)
 	return valid			
 
-def get_text():
+def get_default_text():
 	t = []
 	conn = sqlite3.connect("pykov.db")
 	c = conn.cursor()
@@ -171,6 +174,13 @@ def get_text():
 	""")
 	for item in texts:
 		t.append(item)
+	c.close()
+	return t
+
+def get_user_text():
+	conn = sqlite3.connect("pykov.db")
+	c = conn.cursor()
+	t = []
 	if 'username' in session and session['username'] != None:
 		user_id = c.execute("""
 			SELECT id
@@ -186,10 +196,8 @@ def get_text():
 		""", (user_id,))
 		for item in texts:
 			t.append(item)
-	c.close()
 	return t
-
-			
+	
 def validate_token(token):
 	conn = sqlite3.connect('pykov.db')
 	cur = conn.cursor()
@@ -267,8 +275,8 @@ def genNewText(data):
 def logout():
 	session['username'] = None
 	session['token'] = None
-	t = get_text()	
-	return render_template("index.html", texts=t)
+	t = get_default_text()	
+	return render_template("index.html", texts=(t, []))
 
 app.secret_key = "b'\x07\x8c7>s\xe6\x88\xa2\xdf?[\xedy\xdf\xf0sL\xa4\xe63!-E7"
 
