@@ -76,7 +76,7 @@ def login():
 #   'token': 'user token' }
 @app.route('/api/upload', methods=['POST'])
 def upload():
-	data = request.get_json()
+	data = request.get_json(force=True)
 	title = data['title']
 	corpus = data['corpus']
 	token = data['token']
