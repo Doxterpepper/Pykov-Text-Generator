@@ -1,51 +1,26 @@
 from flask import Flask, render_template, url_for, request, Response, redirect, session, escape
 from flask_wtf import Form
-from flask_login import login_required
 import sqlite3
 import hashlib
 import Markov
 import pickle
+import json
 
 import db_init
 
 app = Flask(__name__)
 name = ''
 pwd = ''
-DATABASE = 'pykov.sqlite'
-conn = sqlite3.connect(DATABASE)
 
 @app.route('/')
 def index():
-	t = []
-	conn = sqlite3.connect("pykov.db")
-	c = conn.cursor()
-	texts = c.execute("""
-		SELECT id, title
-		FROM Text
-		WHERE uid=1;
-	""")
-	for item in texts:
-		t.append(item)
+	t = get_default_text()	
+	user_text = []
 	if 'username' in session and session['username'] != None:
-		user_id = c.execute("""
-			SELECT id
-			FROM Users
-			WHERE username=?
-		""", (session['username'],))
-		user_id = user_id.fetchall()[0][0]
-		print(user_id)
-		texts = c.execute("""
-			SELECT id, title
-			FROM Text
-			WHERE uid=?;
-		""", (user_id,))
-		for item in texts:
-			t.append(item)
-		
-	conn.close()
-	return render_template("index.html", texts=t)
+		user_text = get_user_text()
+	return render_template("index.html", texts=(t, user_text))
 
-@app.route('/signup.html', methods=['POST', 'GET'])	
+@app.route('/signup.html', methods=['POST', 'GET'])
 def signup():
 	error = None
 	if request.method == 'POST':
@@ -82,12 +57,21 @@ def login():
 			error = 'Incorrect username or password. Please try again.'
 		else: #login successful
 			session['username'] = username
+			conn = sqlite3.connect('pykov.db')
+			c = conn.cursor()
+			token = c.execute("""
+				SELECT token
+				FROM Users
+				WHERE username=?
+			""", (username, ))
+			token = token.fetchall()[0][0]
+			session['token'] = token
 			return redirect(url_for('index'))
 		
 		return render_template("login.html", error=error)
 	else:
 		return render_template("login.html")
-		
+
 # { 'title': 'some title',
 #   'corpus': 'some corpus',
 #   'token': 'user token' }
@@ -112,6 +96,33 @@ def upload():
 	conn.commit()
 	conn.close()
 	return "success"
+
+@app.route('/api/corpus', methods=['GET', 'POST'])
+def get_corpus():
+	print(request.is_json)
+	data = request.get_json(force=True)
+	if data == None:
+		return "401"
+	if not 'id' in data or data['id'] == None:
+		return 'no id specified'
+	user_id = 1
+	if 'token' in data and data['token'] != None:
+		if not 'id' in data:
+			return "fail"
+		user_id= validate_token(data['token'])
+		if user_id < 0:
+			return "401 unauthorized"
+	conn = sqlite3.connect("pykov.db")
+	c = conn.cursor()
+	text = c.execute("""
+		SELECT Title, Content
+		FROM Text
+		WHERE id=?
+		AND uid=?
+	""", (data['id'], user_id))
+	ret = text.fetchall()
+	return json.dumps({"title": ret[0][0], "text": ret[0][1]})
+	
 
 @app.route('/api/list', methods=['GET'])
 def list():
@@ -147,7 +158,42 @@ def validate(username, password):
 					if dbName==username:
 						valid=md5hash(dbPass,password)
 	return valid			
-			
+
+def get_default_text():
+	t = []
+	conn = sqlite3.connect("pykov.db")
+	c = conn.cursor()
+	texts = c.execute("""
+		SELECT id, title
+		FROM Text
+		WHERE uid=1;
+	""")
+	for item in texts:
+		t.append(item)
+	c.close()
+	return t
+
+def get_user_text():
+	conn = sqlite3.connect("pykov.db")
+	c = conn.cursor()
+	t = []
+	if 'username' in session and session['username'] != None:
+		user_id = c.execute("""
+			SELECT id
+			FROM Users
+			WHERE username=?
+		""", (session['username'],))
+		user_id = user_id.fetchall()[0][0]
+		print(user_id)
+		texts = c.execute("""
+			SELECT id, title
+			FROM Text
+			WHERE uid=?;
+		""", (user_id,))
+		for item in texts:
+			t.append(item)
+	return t
+	
 def validate_token(token):
 	conn = sqlite3.connect('pykov.db')
 	cur = conn.cursor()
@@ -221,12 +267,13 @@ def genNewText(data):
 		n = 10
 	return Markov.gen_with_text(data['corpus'], n)
 	
-@app.route("/logout")
-@login_required
+@app.route("/logout", methods=['POST'])
 def logout():
-    logout_user()
-    return redirect("index.html")
-	
+	session['username'] = None
+	session['token'] = None
+	t = get_default_text()	
+	return render_template("index.html", texts=(t, []))
+
 app.secret_key = "b'\x07\x8c7>s\xe6\x88\xa2\xdf?[\xedy\xdf\xf0sL\xa4\xe63!-E7"
 
 
