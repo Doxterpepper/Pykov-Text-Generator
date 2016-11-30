@@ -205,6 +205,19 @@ def validate_token(token):
 def md5hash(hashed_pass, user_pass):
 	return hashed_pass == hashlib.md5(user_pass.encode()).hexdigest()
 			
+def validateTitle(title, token):
+	conn = sqlite3.connect('pykov.db')
+	valid = true
+	with conn:
+				cur = con.cursor()
+				cur.execute('''SELECT title FROM Text
+				WHERE token=?''',(token,))
+				rows = cur.fetchall()
+				for row in rows:
+					dbTitle = row[0]
+					if dbTitle == title:
+						valid = False
+	return valid
 			
 def validateName(username):
 	conn = sqlite3.connect('pykov.db')
