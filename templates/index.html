@@ -17,7 +17,7 @@
 					<option onClick="get_corpus({{item[0]}})" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
 				{% for item in texts[1] %}
-					<option onClick="get_corpus({{item[0]}}, {{session['token']}})" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+					<option onClick=get_corpus({{item[0]}}, "{{session['token']}}") value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
 			</select>
 			{% if session['username'] %}
@@ -42,7 +42,7 @@
 		<div  id=functions2>
 			<div class=alignright id=controls>
 				Enter Word Count: <input type="text">
-				<input onClick="generate()" type="submit" value="Generate">
+				<input onClick=generate() type="submit" value="Generate">
 			</div>
 		</div>
 		<div id=generated>
