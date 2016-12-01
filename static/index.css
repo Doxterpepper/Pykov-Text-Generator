@@ -42,7 +42,7 @@ input[type='text'] {
 #functions2 {
 	width: 80%;
 	display: block;
-	margin: 10px auto 10px auto;
+	margin: 10px auto auto auto;
 	border: none;
 }
 
@@ -51,8 +51,17 @@ input[type='text'] {
 	color: white;
 	width: 20%;
 	padding: 10px;
+	margin-bottom: 10px;
 }
 
 #functions2 input[type='text'] {
 	width: 100px;
+}
+
+#generated {
+	width: 80%;
+	display: block;
+	color: #FFFFFF;
+	margin: 10px auto 10px auto;
+	clear: right;
 }
