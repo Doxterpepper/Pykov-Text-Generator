@@ -14,10 +14,10 @@
 				<option onClick="clear_corpus()" selected></option>
 				<!-- Add default texts -->
 				{% for item in texts[0] %}
-					<option onClick="get_corpus({{item[0]}})" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+					<option onClick=get_corpus({{item[0]}}) value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
 				{% for item in texts[1] %}
-					<option onClick=get_corpus({{item[0]}}, "{{session['token']}}") value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+					<option onClick="get_corpus({{item[0]}}, '{{session["token"]}}')" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
 			</select>
 			{% if session['username'] %}
