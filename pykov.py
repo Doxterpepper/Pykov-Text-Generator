@@ -205,6 +205,19 @@ def validate_token(token):
 def md5hash(hashed_pass, user_pass):
 	return hashed_pass == hashlib.md5(user_pass.encode()).hexdigest()
 			
+def validateTitle(title, token):
+	conn = sqlite3.connect('pykov.db')
+	valid = true
+	with conn:
+				cur = con.cursor()
+				cur.execute('''SELECT title FROM Text
+				WHERE token=?''',(token,))
+				rows = cur.fetchall()
+				for row in rows:
+					dbTitle = row[0]
+					if dbTitle == title:
+						valid = False
+	return valid
 			
 def validateName(username):
 	conn = sqlite3.connect('pykov.db')
@@ -282,17 +295,17 @@ app.secret_key = "b'\x07\x8c7>s\xe6\x88\xa2\xdf?[\xedy\xdf\xf0sL\xa4\xe63!-E7"
 #      -H "Content-Type: application/json"\
 #      -d '{"text": 'This is some corpus", "n": 10}'\
 #      'some.url/api/gen'
-@app.route('/api/gen')
+@app.route('/api/gen', methods=['POST', 'GET'])
 def userless_gen():
-	data = request.get_json()
+	data = request.get_json(force=True)
 	if data == None:
 		return "401 unauthorized"
 	if 'text-id' in data:
 		print('here')
-		return genSaved(data)
+		return json.dumps({"corpus": genSaved(data)})
 	elif 'corpus' in data:
-		return genNewText(data)
-	return ""
+		return json.dumps({"corpus": genNewText(data)})
+	return json.dumps({"error": True}) 
 	
 if __name__ == '__main__':
 	app.run(port=4999, debug=True)
