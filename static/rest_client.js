@@ -1,11 +1,22 @@
 var url="http://localhost:4999"
+var last_index = null;
 
 function clear_corpus() {
 	document.getElementById('corpus').value = "";
 	document.getElementById('title').value = "";
 }
 
-function get_corpus(id, token) {
+function get_corpus(select, token) {
+	if (last_index == null) {
+		last_index = select.selectedIndex;
+		return;
+	}
+	else if (last_index == select.selectedIndex) {
+		return;
+	}
+	last_index = select.selectedIndex;
+	var selected = document.querySelector("select").value;
+	var id = selected[1];
 	var requests = new XMLHttpRequest();
 	requests.open("POST", url+"/api/corpus", false);
 	var data = JSON.stringify({"id": id, 'token': token});
