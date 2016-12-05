@@ -16,11 +16,14 @@ body {
 	color: white;
 	padding: 3px 10px 3px 10px; /* top right bottom left */
 	border: none;
-	margin-left: 10px
+	margin-left: 10px;
 }
 
 .alignright {
 	float: right;
+}
+.alignleft {
+	float: left;
 }
 
 strong {

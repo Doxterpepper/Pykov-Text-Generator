@@ -12,7 +12,7 @@ function get_corpus(id, token) {
 	ret = requests.send(data);
 	var response = JSON.parse(requests.response);
 	document.getElementById('corpus').value = response['text'];
-	document.getElementById('title').value = response['title'];
+	//document.getElementById('title').value = response['title'];
 }
 
 function generate() {
@@ -34,7 +34,7 @@ function generate() {
 	requests.send(data);
 	var response = JSON.parse(requests.response);
 	console.log(response["corpus"]);
-	document.getElementById('generated').childNodes[1].innerText = response["corpus"];
+	document.getElementById('generated').value = response["corpus"];
 }
 
 function save_corpus(token) {
