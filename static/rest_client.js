@@ -41,13 +41,16 @@ function save_corpus(token) {
 	var requests =new XMLHttpRequest();
 	requests.open("POST", url+"/api/upload", false);
 	corpus = document.getElementById('corpus').value;
-	title = document.getElementById('title').value;
-	if (corpus == "" || title == "")
+	title = prompt("What would you like to name this?");
+	console.log(title);
+	console.log(title);
+	console.log(token);
+	if (corpus == "")
 	{
-		error = "Please input text into both the title, and corpus fields."
+		error = "Please input text into corpus field."
 		alert(error);
 		return error;
 	}
-		var data = JSON.stringify({'token': token, 'title': title, 'corpus':corpus});
-		ret = requests.send(data);
+	var data = JSON.stringify({'token': token, 'title': title, 'corpus':corpus});
+	ret = requests.send(data);
 }
