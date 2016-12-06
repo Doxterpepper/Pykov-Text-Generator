@@ -41,12 +41,12 @@
 			<div id=functions2>
 				<input class='button alignleft' onClick=save_corpus("{{session['token']}}") type="submit" value="Save">
 				<input class='button alignright' id=generate onClick=generate() type="submit" value="Generate">
-				<input class=alignright placeholder='Word Count' type="text">
+				<input id=wordcount class=alignright placeholder='Word Count' type="text">
 			</div>
 		
 		</div>
 		<div id=textright class=alignright>
-			<textarea id =generateed placeholder="This is where generated text will appear!"></textarea>
+			<textarea id =generated placeholder="This is where generated text will appear!"></textarea>
 		</div>
 		</div>
 	</body>

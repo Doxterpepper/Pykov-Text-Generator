@@ -19,10 +19,10 @@ function generate() {
 	var requests = new XMLHttpRequest();
 	requests.open("POST", url+"/api/gen", false);
 	var text = document.getElementById('corpus').value;
-	var num = document.getElementById('controls').childNodes[1].value;
+	var num = document.getElementById('wordcount').value;
 
 	num = parseInt(num, 10);
-	//console.log(typeof(num));
+	console.log(typeof(num));
 	if (isNaN(num)) {
 		alert("Invalid input");
 		return;

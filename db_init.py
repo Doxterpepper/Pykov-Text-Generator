@@ -44,10 +44,11 @@ c = conn.cursor()
 
 def init_corpus():
 	path = os.path.join("static", "texts")
+	print(path)
 	#Eric, change this so it's specific to your directory. Be sure that you are going all the way down to \static\texts\\
-	path = r"C:\Users\Eric\Pykov-Text-Generator\static\texts\\"
+	#path = r"C:\Users\Eric\Pykov-Text-Generator\static\texts\\"
 	for f in os.listdir(path):
-		text_file = open(path + f, 'r')
+		text_file = open(os.path.join("static", "texts", f), 'r')
 		text = text_file.read()
 		default_texts.append((re.split("\.", f)[0], text, pickle.dumps(Markov.gen_relation(text)), 1))
 	for text in default_texts:
@@ -67,10 +68,10 @@ def create_user():
 	""", (admin, hp, token))
 
 	
-c.execute('''
-		DROP TABLE Users;
-''')
-c.execute('''DROP TABLE Text;''')
+#c.execute('''
+		#DROP TABLE Users;
+#''')
+#c.execute('''DROP TABLE Text;''')
 	
 try:
 	# Create Users table
