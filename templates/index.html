@@ -10,14 +10,15 @@
 			<h1>Pykov Text Generator</h1>
 		</div>
 		<div id=functions1>
-			<select>
-				<option onClick="clear_corpus()" selected></option>
+			<!-- <select onClick="console.log(this.selectedIndex)">-->
+			<select onClick="get_corpus(this)">
+				<option selected></option>
 				<!-- Add default texts -->
 				{% for item in texts[0] %}
-					<option onClick=get_corpus({{item[0]}}) value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+					<option value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
 				{% for item in texts[1] %}
-					<option onClick="get_corpus({{item[0]}}, '{{session["token"]}}')" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+					<option value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
 			</select>
 			{% if session['username'] %}
