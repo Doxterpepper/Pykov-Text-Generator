@@ -14,8 +14,8 @@
 
   <div class="container">
   {% if error %}
-		<p class="error"><strong>Error:</strong> {{ error }}
-		{% endif %}
+		<p class="error"><strong>{{ error }}</strong> 
+	{% endif %}
 		<form method="POST" action="/login.html">
     <label><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="userName" required>
