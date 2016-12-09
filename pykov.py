@@ -86,7 +86,6 @@ def upload():
 	relations = Markov.gen_relation(corpus)
 	conn = sqlite3.connect('pykov.db')
 	cur = conn.cursor()
-	print(corpus)
 	cur.execute("""
 		INSERT INTO Text
 		(content, relations, uid, title)
@@ -98,7 +97,6 @@ def upload():
 
 @app.route('/api/corpus', methods=['GET', 'POST'])
 def get_corpus():
-	print(request.is_json)
 	data = request.get_json(force=True)
 	if data == None:
 		return "401"
@@ -131,7 +129,6 @@ def list():
 	if user_id < 0:
 		return "401 Unauthorized"
 	conn = sqlite3.connect('pykov.db')
-	print(user_id)
 	cur = conn.cursor()
 	cur.execute("""
 		SELECT id, title
@@ -183,7 +180,6 @@ def get_user_text():
 			WHERE username=?
 		""", (session['username'],))
 		user_id = user_id.fetchall()[0][0]
-		print(user_id)
 		texts = c.execute("""
 			SELECT id, title
 			FROM Text
@@ -258,7 +254,6 @@ def genSaved(data):
 	user_id = validate_token(data['token'])
 	if user_id < 0:
 		return '401 Unauthorized'
-	print(user_id)
 	conn = sqlite3.connect('pykov.db')
 	cur = conn.cursor()
 	cur.execute('''
@@ -301,7 +296,6 @@ def userless_gen():
 	if data == None:
 		return "401 unauthorized"
 	if 'text-id' in data:
-		print('here')
 		return json.dumps({"corpus": genSaved(data)})
 	elif 'corpus' in data:
 		return json.dumps({"corpus": genNewText(data)})
