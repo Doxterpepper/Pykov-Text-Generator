@@ -17,6 +17,9 @@ function get_corpus(select, token) {
 	last_index = select.selectedIndex;
 	var selected = document.querySelector("select").value;
 	var id = selected[1];
+	if (id < 3) {
+	  token = null;
+	}
 	var requests = new XMLHttpRequest();
 	requests.open("POST", url+"/api/corpus", false);
 	var data = JSON.stringify({"id": id, 'token': token});

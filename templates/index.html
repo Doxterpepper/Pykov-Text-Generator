@@ -11,7 +11,7 @@
 		</div>
 		<div id=functions1>
 			<!-- <select onClick="console.log(this.selectedIndex)">-->
-			<select onClick="get_corpus(this)">
+			<select onClick="get_corpus(this, '{{session["token"]}}')">
 				<option selected></option>
 				<!-- Add default texts -->
 				{% for item in texts[0] %}
