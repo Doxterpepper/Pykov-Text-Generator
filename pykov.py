@@ -35,10 +35,10 @@ def signup():
 				return render_template("login.html", error=error)
 			else: 
 				#Username already exists in DB
-				error = 'That username is already taken. Please try again.'
+				error = 'Error: That username is already taken. Please try again.'
 				return render_template("signup.html",error = error)
-		else:
-			error = 'Please make sure you type your password correctly.'
+		else:	#Incorrect password
+			error = 'Error: Please make sure you type your password correctly.'
 			return render_template("signup.html",error=error)
 		return redirect(url_for(('index')))
 	else:
@@ -53,7 +53,7 @@ def login():
 		password = request.form['userPassword']
 		validated = validate(username, password)
 		if validated == False:
-			error = 'Incorrect username or password. Please try again.'
+			error = 'Error: Incorrect username or password. Please try again.'
 		else: #login successful
 			session['username'] = username
 			conn = sqlite3.connect('pykov.db')
