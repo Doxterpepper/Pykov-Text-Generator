@@ -10,16 +10,18 @@
 			<h1>Pykov Text Generator</h1>
 		</div>
 		<div id=functions1>
-			<select>
-				<option onClick="clear_corpus()" selected></option>
+			<!-- <select onClick="console.log(this.selectedIndex)">-->
+			<select onClick="get_corpus(this)">
+				<option selected></option>
 				<!-- Add default texts -->
 				{% for item in texts[0] %}
-					<option onClick=get_corpus({{item[0]}}) value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+					<option value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
 				{% for item in texts[1] %}
-					<option onClick="get_corpus({{item[0]}}, '{{session["token"]}}')" value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
+					<option value='{{item}}'>{{item[0]}} - {{item[1]}}</option>
 				{% endfor %}
 			</select>
+			
 			{% if session['username'] %}
 				<div class=alignright>
 					Welcome, {{session['username']}}.
@@ -32,23 +34,23 @@
 				<a class='alignright button' href="signup.html">Sign Up</a>
 			{% endif %}
 		</div>
+		<div id=alltext>
+		<div id=textleft class=alignleft>
 		
-		<div id=text-inputs>
-			<input id=title type='text' placeholder='Title'>
 			<textarea id=corpus placeholder='Welcome to the Pykov Text Generator. To use, either select a default file from the dropdown above, or log in and submit your own texts to generate from. After selecting your desired text, input an integer number under generate and behold the results!'></textarea>
-		</div>
-
-		<div  id=functions2>
-			<div class=alignright id=controls>
-				Enter Word Count: <input type="text">
-				<input onClick=generate() type="submit" value="Generate">
+		
+			<div id=functions2>
+				{% if session['username'] %}
+				<input class='button alignleft' onClick=save_corpus("{{session['token']}}") type="submit" value="Save">
+				{% endif %}
+				<input class='button alignright' id=generate onClick=generate() type="submit" value="Generate">
+				<input id=wordcount class=alignright placeholder='Word Count' type="text">
 			</div>
-			<div class=alignleft id=controls>
-				<input onClick=save_corpus("{{session['token']}}") type="submit" value="Submit">
-			</div>
+		
 		</div>
-		<div id=generated>
-			<p></p>
+		<div id=textright class=alignright>
+			<textarea id =generated placeholder="This is where generated text will appear!"></textarea>
+		</div>
 		</div>
 	</body>
 </html>
