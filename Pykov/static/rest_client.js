@@ -1,4 +1,4 @@
-var url="http://localhost:4999"
+var url="http://localhost:5000"
 var last_index = null;
 
 function clear_corpus() {

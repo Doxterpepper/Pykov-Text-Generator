@@ -90,7 +90,7 @@ span.psw {
 	{% if username %}
 		<p class="username"><strong>Welcome, {{username}}.</strong> 
 	{% endif %}	
-		<form method="POST" action="/signup.html">
+		<form method="POST" action="/signup">
     <label><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="userName" required>
 
@@ -99,7 +99,7 @@ span.psw {
 	
 	<label><b>Re-type Password</b></label>
 	<input type="password" placeholder="Re-type Password" name="userPasswordVerification" required>    
-    <a href="login.html"><button id="button">Login</button></a>
+    <a href="login"><button id="button">Login</button></a>
 	<button type="submit">Sign Up</button>
 	</form>
 

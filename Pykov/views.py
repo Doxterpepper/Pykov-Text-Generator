@@ -70,5 +70,5 @@ def login():
 def logout():
 	session['username'] = None
 	session['token'] = None
-	t = get_default_text()	
+	t = vh.get_default_text()	
 	return render_template("index.html", texts=(t, []))
