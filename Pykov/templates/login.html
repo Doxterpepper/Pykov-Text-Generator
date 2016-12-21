@@ -2,28 +2,28 @@
 <html>
 
 <head>
-    <link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
-    <link rel='stylesheet' href="{{ url_for('static', filename='login.css') }}">
+	<link rel='stylesheet' href="{{ url_for('static', filename='general.css') }}">
+	<link rel='stylesheet' href="{{ url_for('static', filename='login.css') }}">
 
 </head>
 <body>
 
-		<div class=title>
-			<h1>Pykov Text Generator</h1>
-		</div>
+	<div class=title>
+		<h1>Pykov Text Generator</h1>
+	</div>
 
-  <div class="container">
-  {% if error %}
-		<p class="error"><strong>Error:</strong> {{ error }}
-		{% endif %}
-		<form method="POST" action="/login">
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="userName" required>
+ 	<div class="container">
+	{% if error %}
+		<p class="error"><strong>{{ error }}</strong> 
+	{% endif %}
+		<form method="POST" action="/login.html">
+	<label><b>Username</b></label>
+	<input type="text" placeholder="Enter Username" name="userName" required>
 
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="userPassword" required>
-        
-    <button type="submit">Login</button>
+	<label><b>Password</b></label>
+	<input type="password" placeholder="Enter Password" name="userPassword" required>
+	    
+	<button type="submit">Login</button>
 	</form>
 	<a href="signup"><button type="submit">Sign Up</button></a>
 
